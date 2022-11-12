@@ -1,14 +1,11 @@
-import './App.css';
+import "./App.css";
 
 function App() {
-  const name = "Rhandell";
-  return (
-    <div className="App">
-      <h1>{name}</h1>
-      <h1>{name}</h1> 
-      <h1>{name}</h1> 
-    </div>
-  );
+  return <div className="App"></div>;
 }
+
+const User = () => {
+  return <div></div>;
+};
 
 export default App;
