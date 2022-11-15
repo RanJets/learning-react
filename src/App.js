@@ -10,7 +10,9 @@ function App() {
   );
 }
 
+//this is a Component and it should always start with capital letter
 const User = (props) => {
+  //'props' must be used in order to fetch data to a component
   return (
     <div>
       <h1>{props.name}</h1>
