@@ -1,23 +1,30 @@
-//IN this Lesson I used useEffect hook for the life cycle of a component
-//the Mount Update and Unmount stages found in the Text.js
-
-import { useState } from "react";
 import "./App.css";
-import { Text } from "./Text";
+import Axios from "axios";
+import { useEffect, useState } from "react";
+
+//using fetch method to get data from api
+// fetch("https://catfact.ninja/fact")
+//   .then((res) => res.json())
+//   .then((data) => {
+//     console.log(data);
+//   });
 
 function App() {
-  const [showText, setShowText] = useState(false);
+  const [catFact, setCatFact] = useState("");
+
+  const fetchCatFact = () => {
+    Axios.get("https://catfact.ninja/fact").then((res) => {
+      setCatFact(res.data.fact);
+    });
+  };
+  useEffect(() => {
+    fetchCatFact();
+  }, []);
 
   return (
     <div className="App">
-      <button
-        onClick={() => {
-          setShowText(!showText);
-        }}
-      >
-        {showText ? "Hide Text" : "Show Text"}
-      </button>
-      {showText && <Text />}
+      <button onClick={fetchCatFact}> Generate Cat Fact</button>
+      <p>{catFact}</p>
     </div>
   );
 }
