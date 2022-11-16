@@ -3,25 +3,25 @@ import Axios from "axios";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [name, setName] = useState("");
-  const [predictedAge, setPredictedAge] = useState(null); //onother way of initializing an object - 'null'
+  const [category, setCategory] = useState("");
 
-  const fetchData = () => {
-    Axios.get(`https://api.agify.io/?name=${name}`).then((res) => {
-      setPredictedAge(res.data);
-    });
+  const getCategory = (catname) => {
+    Axios.get(`https://excuser.herokuapp.com/v1/excuse/${catname}/`).then(
+      (res) => {
+        setCategory(res.data[0]);
+      }
+    );
   };
+
   return (
-    //question mark basically prevent the object from bricking due to null value
     <div className="App">
-      <input
-        placeholder="enter name"
-        onChange={(event) => setName(event.target.value)}
-      />
-      <button onClick={fetchData}> Predict Age</button>
-      <h1>Name: {predictedAge?.name}</h1>
-      <h1>Predicted Age: {predictedAge?.age} </h1>
-      <h1>Count: {predictedAge?.count}</h1>
+      <h1> Generate An Excuse </h1>
+      <button onClick={() => getCategory("party")}> Party</button>
+      <button onClick={() => getCategory("family")}> Family</button>
+      <button onClick={() => getCategory("office")}> Office </button>
+
+      <p> {category?.excuse} </p>
+      <p> {category?.category} </p>
     </div>
   );
 }
