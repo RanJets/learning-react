@@ -14,21 +14,24 @@ function App() {
     const task = {
       id: todoList.length == 0 ? 1 : todoList[todoList.length - 1].id + 1,
       taskName: newTask,
+      completed: false,
     };
     setTodoList([...todoList, task]);
   };
 
+  const completeTask = (id) => {
+    setTodoList(
+      todoList.map((task) => {
+        if (task.id === id) {
+          return { ...task, completed: true };
+        } else {
+          return task;
+        }
+      })
+    );
+  };
   const deleteTask = (id) => {
     setTodoList(todoList.filter((tasks) => tasks.id != id));
-    //const newTodoList = todoList.filter((task) => {
-    //return task != taskName; //This code is equivalent to the code below. It automatically returns true for this comparison operator.
-    /*
-      if (task == taskName) {
-        return false;
-      } else {
-        return true;
-      }*/
-    //});
   };
 
   return (
@@ -44,7 +47,9 @@ function App() {
             <Task
               taskName={tasks.taskName}
               id={tasks.id}
+              completed={tasks.completed}
               deleteTask={deleteTask}
+              completeTask={completeTask}
             />
           );
         })}
