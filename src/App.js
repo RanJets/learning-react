@@ -3,25 +3,26 @@ import Axios from "axios";
 import { useEffect, useState } from "react";
 
 function App() {
+  const [data, setData] = useState(null);
   const [name, setName] = useState("");
-  const [predictedAge, setPredictedAge] = useState(null); //onother way of initializing an object - 'null'
 
   const fetchData = () => {
-    Axios.get(`https://api.agify.io/?name=${name}`).then((res) => {
-      setPredictedAge(res.data);
+    Axios.get(`https://api.genderize.io/?name=${name}`).then((res) => {
+      setData(res.data);
     });
   };
   return (
-    //question mark basically prevent the object from bricking due to null value
     <div className="App">
-      <input
-        placeholder="enter name"
-        onChange={(event) => setName(event.target.value)}
-      />
-      <button onClick={fetchData}> Predict Age</button>
-      <h1>Name: {predictedAge?.name}</h1>
-      <h1>Predicted Age: {predictedAge?.age} </h1>
-      <h1>Count: {predictedAge?.count}</h1>
+      <div>
+        <input onChange={(event) => setName(event.target.value)} />
+        <button onClick={fetchData}>Fetch Data</button>
+      </div>
+      <div>
+        <p>{data?.count}</p>
+        <p>{data?.gender}</p>
+        <p>{data?.name}</p>
+        <p>{data?.probability}</p>
+      </div>
     </div>
   );
 }
