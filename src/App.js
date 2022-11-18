@@ -4,18 +4,22 @@ import { Home } from "./pages/Home";
 import { Contact } from "./pages/Contact";
 import { Navbar } from "./Navbar";
 import { Profile } from "./pages/Profile";
-import { useState, createContext } from "react";
-//Use context is used to store data globally - alternative for props
-//CreateContext first to create a use context
-export const AppContext = createContext();
+import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+//this lesson is for Query in react
 function App() {
-  const [username, setUsername] = useState("");
+  const client = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   return (
     <div className="App">
-      {/* then wrap the whole routes with AppContext Component */}
-      <AppContext.Provider value={{ username, setUsername }}>
+      <QueryClientProvider client={client}>
         <Router>
           <Navbar />
           <Routes>
@@ -26,7 +30,7 @@ function App() {
             <Route path="*" element={<h1>Page Not Found</h1>} />
           </Routes>
         </Router>
-      </AppContext.Provider>
+      </QueryClientProvider>
       <h3>Footer</h3>
     </div>
   );
