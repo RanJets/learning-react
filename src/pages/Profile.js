@@ -1,12 +1,13 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { ChangeProfile } from "../components.js/ChangeProfile";
+import { useContext } from "react";
+import App, { AppContext } from "../App";
 
 export const Profile = () => {
-  const navigate = useNavigate(); //this hook is to create a navigation for every routes of the page
-  const { username } = useParams(); //this hook accepts parameters that passed in the url
+  const { username } = useContext(AppContext);
   return (
     <div>
-      <h1>This is {username} Profile</h1>
-      <button onClick={() => navigate("/")}>Go to Home</button>
+      <h1>Profile username: {username}</h1>
+      <ChangeProfile />
     </div>
   );
 };
