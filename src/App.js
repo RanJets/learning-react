@@ -2,7 +2,7 @@ import "./App.css";
 import { useCalc } from "./useCalc";
 
 function App() {
-  const [num, add, subrtact, resetnum] = useCalc();
+  const [num, add, subrtact, resetnum] = useCalc(5);
 
   return (
     <div className="App">
