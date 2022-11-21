@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Person, Country } from "./components/Person";
+import { Person, Country, Gender } from "./components/Person";
 
 function App() {
   return (
@@ -10,8 +10,9 @@ function App() {
         email="pedro@gmail.com"
         age={21}
         isMarried={true}
-        friends={["Jessica", "jake", "jerry", "jasmine"]}
+        friends={["a",]}
         country={Country.Brazil}
+        gender={Gender.f}
       />
     </div>
   );

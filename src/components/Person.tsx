@@ -8,6 +8,7 @@ interface Props {
   isMarried: boolean;
   friends: string[];
   country: Country;
+  gender?: Gender;
 }
 
 export enum Country {
@@ -15,6 +16,11 @@ export enum Country {
   Brazil = "Brazil",
   Canada = "Canada",
   France = "France",
+}
+
+export enum Gender {
+  m = "male",
+  f = "female",
 }
 
 export const Person = (props: Props) => {
@@ -29,6 +35,7 @@ export const Person = (props: Props) => {
         <h1>{friend}</h1>
       ))}
       <h1>Country: {props.country}</h1>
+      <h1>Gender: {props.gender}</h1>
     </div>
   );
 };
